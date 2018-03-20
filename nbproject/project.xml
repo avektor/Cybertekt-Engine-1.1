@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.java.j2seproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
+            <name>Cybertekt Engine 1.1</name>
+            <source-roots>
+                <root id="src.dir"/>
+            </source-roots>
+            <test-roots>
+                <root id="test.src.dir"/>
+            </test-roots>
+        </data>
+        <libraries xmlns="http://www.netbeans.org/ns/ant-project-libraries/1">
+            <definitions>.\lib\nblibraries.properties</definitions>
+        </libraries>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>Cybertekt</word>
+            <word>glyphs</word>
+            <word>grayscale</word>
+            <word>iconification</word>
+            <word>iconified</word>
+            <word>iconify</word>
+            <word>Kerning</word>
+            <word>kernings</word>
+            <word>minification</word>
+            <word>mipmap</word>
+            <word>mipmaps</word>
+            <word>Paeth</word>
+            <word>resizable</word>
+            <word>scanline</word>
+            <word>shaders</word>
+            <word>Unbinds</word>
+            <word>unfilter</word>
+            <word>unfiltered</word>
+            <word>Unfilters</word>
+            <word>unicode</word>
+        </spellchecker-wordlist>
+    </configuration>
+</project>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset-manifest>
+    <assets name="Images">
+    </assets>
+    <assets name="Textures">
+        <asset id="Bad" path="Textures/PNG/Bad.png" />
+        <asset id="Grayscale" path="Textures/PNG/Grayscale.png" />
+        <asset id="IDX8" path="Textures/PNG/IDX8.png" />
+        <asset id="LUM8" path="Textures/PNG/LUM8.png" />
+        <asset id="LUMA8" path="Textures/PNG/LUMA8.png" />
+        <asset id="RGB08" path="Textures/PNG/RGB08.png" />
+        <asset id="RGB16" path="Textures/PNG/RGB16.png" />
+        <asset id="RGBA08" path="Textures/PNG/RGBA08.png" />
+        <asset id="RGBA082" path="Textures/PNG/RGBA082.png" />
+        <asset id="RGBA16" path="Textures/PNG/RGBA16.png" />
+    </assets>
+    <assets name="Models">
+        
+    </assets>
+	<assets name="Shaders">
+		<asset id="SolidVertex" path="Shaders/Solid/vertex.vtx" />
+		<asset id="SolidFragment" path="Shaders/Solid/fragment.frg" />
+	</assets>
+</asset-manifest>
