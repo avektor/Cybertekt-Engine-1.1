@@ -4,13 +4,12 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import net.cybertekt.asset.AssetManager;
 import net.cybertekt.asset.font.FontLoader;
-import net.cybertekt.utils.CDFGenerator;
+import net.cybertekt.utils.FontGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +36,7 @@ public class FontTest {
         frame.setSize(new Dimension(1980, 1060));
         frame.setVisible(true);
         try {
-            BufferedImage img = CDFGenerator.generate("assets/Interface/Fonts/ARLRDBD.ttf", 72, 6, CDFGenerator.BASIC_CHARSET, "assets/Interface/Fonts/arial.cdf");
+            BufferedImage img = FontGenerator.generate("assets/Interface/Fonts/TTF/EBRIMA.ttf", 72, 6, FontGenerator.BASIC_CHARSET, "assets/Interface/Fonts/CDF/ebrima.cdf");
             frame.getGraphics().drawImage(img, 50, 50, null);
             try {
                 File output = new File("image.png");
@@ -49,7 +48,7 @@ public class FontTest {
             LOG.info("SDF Font Generation Failed: {}", e.getMessage());
         }
 
-        AssetManager.load("Interface/Fonts/arial.cdf");
+        //AssetManager.load("Interface/Fonts/arial.cdf");
         
         //String tag = "true";
         //try {

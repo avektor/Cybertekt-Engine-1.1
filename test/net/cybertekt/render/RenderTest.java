@@ -117,10 +117,15 @@ public class RenderTest extends Application implements UpdateListener, DisplayLi
         //texture = new GLTexture2D(AssetManager.get(Image.class, "Interface/Fonts/Arial/font.png"));
         //texture = new GLTexture2D(AssetManager.get(Image.class, "Interface/Fonts/DistFontTest.png"));
         
-        font = AssetManager.get(Font.class, "Interface/Fonts/arial.cdf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CDF/arial.cdf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CDF/play.cdf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CDF/titillium.cdf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CDF/trebuchet.cdf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CDF/verdana.cdf");
+        font = AssetManager.get(Font.class, "Interface/Fonts/CDF/ebrima.cdf");
         Image img = new Image(font.getKey(), Image.Format.RGBA8, font.getWidth(), font.getHeight(), font.getData());
-        texture = new GLTexture2D(img, MinFilter.Trilinear, MagFilter.Nearest);
-        Text text = new Text(font, 72, "Cybertekt Engine 1.1.0");
+        texture = new GLTexture2D(img, MinFilter.Linear, MagFilter.Linear);
+        Text text = new Text(font, 14, "The quick brown fox jumps over the lazy dog. 1234567890");
         
         // Create Mesh //
         mesh = text.getMesh();
@@ -134,7 +139,7 @@ public class RenderTest extends Application implements UpdateListener, DisplayLi
         //projection = new Matrix4f().perspective((float) Math.toRadians(60f), getWidth() / getHeight(), 0.01f, 1000f);
         projectionMatrix = new Matrix4f().ortho2D(0, getWidth(), getHeight(), 0); // Left, Right, Bottom, Top
         transform = new Transform();
-        transform.setTranslation(200f, 200f, 0f);
+        //transform.setTranslation(200f, 200f, 0f);
         
         addUpdateListener(this);
         addDisplayListener(this);
@@ -168,7 +173,7 @@ public class RenderTest extends Application implements UpdateListener, DisplayLi
         shader.setUniform(0, projectionMatrix);
         shader.setUniform(1, transform.getMatrix());
         shader.setUniform(2, new Vector2f(font.getWidth(), font.getHeight()));
-        shader.setUniform(3, new Vector4f(0f, 1f, 0f, 1f));
+        //shader.setUniform(3, new Vector4f(0f, 1f, 0f, 1f));
         
         glPointSize(10f);
         //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

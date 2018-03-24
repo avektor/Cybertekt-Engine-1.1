@@ -93,7 +93,7 @@ public class Text {
 
             // Update Text Mesh //
             if (font != null && text != null && text.length() > 0) {
-                float scale = (float) size / font.getSize();
+                float scale = (size + 4) / (float) font.getSize();
 
                 int xPosition = 0;
                 int yPosition = Math.round(font.getLine() * scale);
@@ -118,7 +118,7 @@ public class Text {
                         Glyph glyph = font.getGlyph(current);
 
                         // Get Kerning Offset //
-                        int offset = Math.round(glyph.getKerningOffset(last) * scale);
+                        int offset = (int) (glyph.getKerningOffset(last) * scale);
 
                         // Update Vertices //
                         for (final float vertex : glyph.getVertices(xPosition + offset, yPosition, scale)) {
@@ -141,16 +141,13 @@ public class Text {
                         // Update Character Index Offset //
                         indexOffset += 4;
                     } else if (current == 32) {
-
                         // Add Space //
-                        xPosition += Math.round(font.getSpace() * scale);
+                        xPosition += font.getSpace() * scale;
                     } else if (current == 10) {
-
                         // Add Line Break //
                         yPosition += Math.round(font.getLine() * scale);
                         xPosition = 0;
                     } else if (current == 9) {
-
                         // Add Tab //
                         xPosition += Math.round(font.getSpace() * scale) * 5;
                     }
