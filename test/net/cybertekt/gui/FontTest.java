@@ -36,7 +36,7 @@ public class FontTest {
         frame.setSize(new Dimension(1980, 1060));
         frame.setVisible(true);
         try {
-            BufferedImage img = FontGenerator.generate("assets/Interface/Fonts/TTF/VERDANA.ttf", 32, 3, FontGenerator.BASIC_CHARSET, "assets/Interface/Fonts/CTF/verdana.ctf");
+            BufferedImage img = FontGenerator.generate("assets/Interface/Fonts/TTF/PLAY.ttf", 32, 3, FontGenerator.BASIC_CHARSET, "assets/Interface/Fonts/CTF/play.ctf");
             frame.getGraphics().drawImage(img, 50, 50, null);
             try {
                 File output = new File("image.png");
