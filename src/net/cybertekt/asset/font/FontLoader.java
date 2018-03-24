@@ -20,7 +20,7 @@ import org.lwjgl.BufferUtils;
  * Font Loader - (C) Cybertekt Software
  *
  * Loader for constructing {@link Font font} assets. Currently, this loader only
- * supports the CDF font file format.
+ * supports the CTF font file format.
  *
  * @version 1.1.0
  * @since 1.1.0
@@ -29,16 +29,16 @@ import org.lwjgl.BufferUtils;
 public class FontLoader extends AssetLoader {
 
     /**
-     * {@link AssetType Asset type} for Signed Distance Font (SDF) files.
+     * {@link AssetType Asset type} for Cybertekt Font (CTF) files.
      */
-    public static final AssetType CDF = AssetType.getType("CDF");
+    public static final AssetType CTF = AssetType.getType("CTF");
 
     /**
      * Initializes the list of {@link AssetType asset types} supported by this
      * {@link AssetLoader asset loader}.
      */
     public FontLoader() {
-        SUPPORTED.add(CDF);
+        SUPPORTED.add(CTF);
     }
 
     /**
@@ -52,57 +52,60 @@ public class FontLoader extends AssetLoader {
      */
     @Override
     public AssetTask newTask(final AssetKey key, final InputStream stream) {
-        if (key.getType().equals(CDF)) {
-            return new CDFLoader(key, stream);
+        if (key.getType().equals(CTF)) {
+            return new CTFLoader(key, stream);
         }
         throw new UnsupportedOperationException("Unsupported Font File Type: " + key.getType().toString());
     }
 
-    private class CDFLoader extends AssetTask {
+    /**
+     * Cybertekt Font Loader - (C) Cybertekt Software.
+     */
+    private class CTFLoader extends AssetTask {
 
         /**
-         * CDF File Signature.
+         * CTF File Signature.
          */
-        private static final int CDF = 0x676870; //67-68-70 (CDF)
+        private static final int CTF = 0x846870; //84-68-70 (CTF)
 
         /**
-         * CDF File Header.
+         * CTF File Header.
          */
         private static final int HDR = 0x726882; //72-68-82 (HDR)
 
         /**
-         * CDF Character Information.
+         * CTF Character Information.
          */
         private static final int CHR = 0x677282; //67-72-82 (CHR)
 
         /**
-         * CDF Kerning Information.
+         * CTF Kerning Information.
          */
         private static final int KRN = 0x758278; //75-82-78 (KRN)
 
         /**
-         * CDF Image Data.
+         * CTF Image Data.
          */
         private static final int IMG = 0x737771; //73-77-71 (IMG)
 
         /**
-         * CDF File Footer.
+         * CTF File Footer.
          */
         private static final int FTR = 0x708482; //70-84-82 (FTR)
 
-        public CDFLoader(final AssetKey KEY, final InputStream INPUT) {
+        public CTFLoader(final AssetKey KEY, final InputStream INPUT) {
             super(KEY, INPUT);
         }
 
         @Override
         public final Font load() throws AssetInitializationException {
             try {
-                // Validate CDF File Signature //
-                if (readInt() != CDF) {
+                // Validate CTF File Signature //
+                if (readInt() != CTF) {
                     throw new IOException("Invalid File Signature");
                 }
 
-                // Read CDF Header Data //
+                // Read CTF Header Data //
                 final int SIZE, WIDTH, HEIGHT, LINE, SPACE, COUNT, KERNS;
                 if (readInt() == HDR) {
                     int[] info = readInts(7);
@@ -117,7 +120,7 @@ public class FontLoader extends AssetLoader {
                     throw new IOException("Invalid File Header");
                 }
 
-                // Read CDF Character Data //
+                // Read CTF Character Data //
                 final Map<Integer, Font.Glyph> GLYPHS = new HashMap<>(COUNT);
                 if (readInt() == CHR) {
                     for (int i = 0; i < COUNT; i++) {
@@ -128,7 +131,7 @@ public class FontLoader extends AssetLoader {
                     throw new IOException("Missing Glyph Data");
                 }
 
-                // Read CDF Kerning Data //
+                // Read CTF Kerning Data //
                 if (readInt() == KRN) {
                     for (int i = 0; i < KERNS; i++) {
                         int[] info = readInts(3);
@@ -138,7 +141,7 @@ public class FontLoader extends AssetLoader {
                     throw new IOException("Missing Kerning Data");
                 }
 
-                // Read CDF Image Data //
+                // Read CTF Image Data //
                 final ByteBuffer DATA = BufferUtils.createByteBuffer(WIDTH * HEIGHT * 8).order(ByteOrder.nativeOrder());
                 if (readInt() == IMG) {
                     DATA.asIntBuffer().put(readInts(WIDTH * HEIGHT));
@@ -147,12 +150,12 @@ public class FontLoader extends AssetLoader {
                     throw new IOException("Missing Image Data");
                 }
 
-                // Read CDF File Footer //
+                // Read CTF File Footer //
                 if (readInt() != FTR) {
                     throw new IOException("Invalid File Footer");
                 }
 
-                // Create CDF Font //
+                // Create CTF Font //
                 return new Font(KEY, SIZE, WIDTH, HEIGHT, LINE, SPACE, DATA, GLYPHS);
             } catch (IOException e) {
                 throw new AssetManager.AssetInitializationException(KEY, "Font file is invalid or corrupt (" + e.getMessage() + ")");

@@ -25,6 +25,6 @@ void main() {
     vec2 duv = 0.5 * (dFdx(uv) + dFdy(uv));
     vec4 box = vec4(uv-duv, uv+duv);
     float asum = samp(box.xy, width) + samp(box.zw, width) + samp(box.xw, width) + samp(box.zy, width);
-    alpha = (alpha + 0.6 * asum) / 3.0;
+    alpha = (alpha + 0.5 * asum) / 3.0;
     fragColor = vec4(vec3(alpha), alpha) * mColor;
 }

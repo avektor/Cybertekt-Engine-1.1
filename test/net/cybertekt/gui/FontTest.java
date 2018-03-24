@@ -36,7 +36,7 @@ public class FontTest {
         frame.setSize(new Dimension(1980, 1060));
         frame.setVisible(true);
         try {
-            BufferedImage img = FontGenerator.generate("assets/Interface/Fonts/TTF/EBRIMA.ttf", 72, 6, FontGenerator.BASIC_CHARSET, "assets/Interface/Fonts/CDF/ebrima.cdf");
+            BufferedImage img = FontGenerator.generate("assets/Interface/Fonts/TTF/VERDANA.ttf", 32, 3, FontGenerator.BASIC_CHARSET, "assets/Interface/Fonts/CTF/verdana.ctf");
             frame.getGraphics().drawImage(img, 50, 50, null);
             try {
                 File output = new File("image.png");
@@ -45,23 +45,7 @@ public class FontTest {
                 LOG.info("Exception: {}", e.getMessage());
             }
         } catch (IOException e) {
-            LOG.info("SDF Font Generation Failed: {}", e.getMessage());
+            LOG.info("CTF Font Generation Failed: {}", e.getMessage());
         }
-
-        //AssetManager.load("Interface/Fonts/arial.cdf");
-        
-        //String tag = "true";
-        //try {
-            //LOG.info("Tag = {}", tag.getBytes("ISO-8859-1"));\
-        //} catch (UnsupportedEncodingException e) {
-
-        //}
-
-        /*
-
-        FontConverter gen = new FontConverter("assets/Interface/Fonts/arial.ttf", 68, 10);
-        BufferedImage img = gen.getImage();
-        frame.getGraphics().drawImage(img, 50, 50, null);
-        gen.export("assets/Interface/Fonts/arial.sdf"); */
     }
 }

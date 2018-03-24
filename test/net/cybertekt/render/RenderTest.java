@@ -117,15 +117,24 @@ public class RenderTest extends Application implements UpdateListener, DisplayLi
         //texture = new GLTexture2D(AssetManager.get(Image.class, "Interface/Fonts/Arial/font.png"));
         //texture = new GLTexture2D(AssetManager.get(Image.class, "Interface/Fonts/DistFontTest.png"));
         
-        //font = AssetManager.get(Font.class, "Interface/Fonts/CDF/arial.cdf");
-        //font = AssetManager.get(Font.class, "Interface/Fonts/CDF/play.cdf");
-        //font = AssetManager.get(Font.class, "Interface/Fonts/CDF/titillium.cdf");
-        //font = AssetManager.get(Font.class, "Interface/Fonts/CDF/trebuchet.cdf");
-        //font = AssetManager.get(Font.class, "Interface/Fonts/CDF/verdana.cdf");
-        font = AssetManager.get(Font.class, "Interface/Fonts/CDF/ebrima.cdf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CTF/arial.ctf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CTF/berlin.ctf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CTF/calibri.ctf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CTF/ebrima.ctf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CTF/eras.ctf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CTF/exo.ctf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CTF/garamond.ctf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CTF/gothic.ctf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CTF/open.ctf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CTF/play.ctf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CTF/titillium.ctf");
+        //font = AssetManager.get(Font.class, "Interface/Fonts/CTF/trebuchet.ctf");
+        font = AssetManager.get(Font.class, "Interface/Fonts/CTF/verdana.ctf");
         Image img = new Image(font.getKey(), Image.Format.RGBA8, font.getWidth(), font.getHeight(), font.getData());
+        
+        // So Far The Best Looking = AA / No SDF / Trilinear Filtering / SDF Shader (Looks good from 8pt to 80pt)
         texture = new GLTexture2D(img, MinFilter.Linear, MagFilter.Linear);
-        Text text = new Text(font, 14, "The quick brown fox jumps over the lazy dog. 1234567890");
+        Text text = new Text(font, 12, "The quick brown fox jumps over the lazy dog. 1234567890");
         
         // Create Mesh //
         mesh = text.getMesh();

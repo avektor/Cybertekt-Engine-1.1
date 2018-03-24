@@ -21,9 +21,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Cybertekt Distance Font (CDF) Generator - (C) Cybertekt Software
+ * Cybertekt Distance Font (CTF) Generator - (C) Cybertekt Software
  *
- * Static utility class that generates a Cybertekt Distance Font (CDF) from an
+ * Static utility class that generates a Cybertekt Distance Font (CTF) from an
  * existing True Type Font (TTF).
  *
  * @version 1.1.0
@@ -33,32 +33,32 @@ import java.util.Map;
 public class FontGenerator {
 
     /**
-     * CDF File Signature.
+     * CTF File Signature.
      */
-    private static final int CDF = 0x676870; //67-68-70 (SDF)
+    private static final int CTF = 0x846870; //84-68-70 (CTF)
 
     /**
-     * CDF File Header.
+     * CTF File Header.
      */
     private static final int HDR = 0x726882; //72-68-82 (HDR)
 
     /**
-     * CDF Character Information.
+     * CTF Character Information.
      */
     private static final int CHR = 0x677282; //67-72-82 (CHR)
 
     /**
-     * CDF Kerning Information.
+     * CTF Kerning Information.
      */
     private static final int KRN = 0x758278; //75-82-78 (KRN)
 
     /**
-     * CDF Image Data.
+     * CTF Image Data.
      */
     private static final int IMG = 0x737771; //73-77-71 (IMG)
 
     /**
-     * CDF File Footer.
+     * CTF File Footer.
      */
     private static final int FTR = 0x708482; //70-84-82 (FTR)
 
@@ -78,17 +78,17 @@ public class FontGenerator {
     }
 
     /**
-     * Creates a Cybertekt Distance Font (CDF) from the existing True Type Font
+     * Creates a Cybertekt Font (CTF) from the existing True Type Font
      * (TTF) located at the path specified.
      *
      * @param TTF the location of the true type font (TTF) file.
      * @param SIZE the point size at which to render the distance font image.
-     * @param SPREAD the amount of padding between glyphs in the CDF image.
+     * @param SPREAD the amount of padding between glyphs in the CTF image.
      * @param CHARSET the characters to include in the distance font.
      * @param PATH the desired file location of the generated distance font.
      * @return the signed distance font image generated from the TTF. May be
-     * used for previewing the results of the CDF generation.
-     * @throws IOException if, for any reason, a CDF could not be generated from
+     * used for previewing the results of the CTF generation.
+     * @throws IOException if, for any reason, a CTF could not be generated from
      * the specified TTF.
      */
     public static final BufferedImage generate(final String TTF, final int SIZE, final int SPREAD, final char[] CHARSET, final String PATH) throws IOException {
@@ -111,7 +111,7 @@ public class FontGenerator {
         // Get Font Space Width //
         final int SPACE = (int) FONT.createGlyphVector(GFX.getFontRenderContext(), new char[]{' '}).getGlyphMetrics(0).getAdvance();
 
-        // Generate CDF Font Image //
+        // Generate CTF Font Image //
         final BufferedImage IMAGE = loadImage(GLYPHS, SPREAD);
 
         // Dispose Of Temporary AWT Graphics2D Object //
@@ -123,10 +123,10 @@ public class FontGenerator {
         // Create Output Font File //
         try (final FileOutputStream OUTPUT = new FileOutputStream(PATH)) {
 
-            // Write CDF File Signature //
-            writeInt(OUTPUT, CDF);
+            // Write CTF File Signature //
+            writeInt(OUTPUT, CTF);
 
-            // Write CDF Header Data //
+            // Write CTF Header Data //
             writeInt(OUTPUT, HDR);
             writeInt(OUTPUT, SIZE); // Write Font Render Size
             writeInt(OUTPUT, IMAGE.getWidth()); // Write Font Image Width
@@ -136,10 +136,10 @@ public class FontGenerator {
             writeInt(OUTPUT, GLYPHS.size()); // Write Font Glyph Count
             writeInt(OUTPUT, KERNINGS.size()); // Write Font Kerning Count
 
-            // Write CDF Characters Signature //
+            // Write CTF Characters Signature //
             writeInt(OUTPUT, CHR);
 
-            // Write CDF Character Data //
+            // Write CTF Character Data //
             for (final Glyph G : GLYPHS) {
                 writeInt(OUTPUT, G.getCode()); // Glyph Character Code
                 writeInt(OUTPUT, G.getX()); // Glyph X-Axis Position.
@@ -151,27 +151,27 @@ public class FontGenerator {
                 writeInt(OUTPUT, G.getAdvance()); // Glyph X-Axis Advance.
             }
 
-            // Write CDF Kernings Signature //
+            // Write CTF Kernings Signature //
             writeInt(OUTPUT, KRN);
 
-            // Write CDF Kerning Data //
+            // Write CTF Kerning Data //
             for (final Kerning K : KERNINGS) {
                 writeInt(OUTPUT, K.getLeft()); // First Kerning Character Code
                 writeInt(OUTPUT, K.getRight()); // Second Kerning Character Code
                 writeInt(OUTPUT, K.getOffset()); // Kerning Position Offset
             }
 
-            // Write CDF Image Data Signature //
+            // Write CTF Image Data Signature //
             writeInt(OUTPUT, IMG);
 
-            // Write CDF Image Data //
+            // Write CTF Image Data //
             for (int y = 0; y < IMAGE.getHeight(); y++) {
                 for (int x = 0; x < IMAGE.getWidth(); x++) {
                     writeInt(OUTPUT, IMAGE.getRGB(x, y));
                 }
             }
 
-            // Write CDF File Footer //
+            // Write CTF File Footer //
             writeInt(OUTPUT, FTR);
         }
         return IMAGE;
@@ -217,7 +217,8 @@ public class FontGenerator {
                 glyph.setHeight((glyph.getHeight() + SPREAD) - 1);
             }
         }
-        return SDFGenerator.genSDF(SPREAD / 2, image);
+        //return SDFGenerator.genSDF(SPREAD / 2, image); This doesn't work nearly as well as rendering the font normally with AA enabled.
+        return image;
     }
 
     /**

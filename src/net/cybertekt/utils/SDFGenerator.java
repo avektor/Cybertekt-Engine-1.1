@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 /**
  * Signed Distance Field Generator - (C) Cybertekt Software
  *
+ * Generates a signed distance field image from an existing image.
+ *
  * @version 1.1.0
  * @since 1.1.0
  * @author Andrew Vektor
